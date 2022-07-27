@@ -14,18 +14,6 @@ namespace LiveCodingApi.Tests
         }
 
         [Test]
-        public async Task GetCatBreedsWithNegativeLimit()
-        {
-            //act
-            var response = await _client.GetBreeds(-1);
-
-            //assert
-            Assert.That(response, Is.Not.Null);
-            Assert.That(response.Data, Is.Null);
-            //add other verification steps
-        }
-
-        [Test]
         public void GetCatBreedsWithPositiveLimit()
         {
             //act

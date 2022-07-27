@@ -18,5 +18,12 @@ namespace LiveCodingApi.Utils
                 .AddQueryParameter("limit", limit);
             return await _client.GetAsync<BreedsResponse>(request);
         }
+
+        public async Task<RandomFactResponse?> GetRandomFact(int maxLength)
+        {
+            var request = new RestRequest("fact", Method.Get)
+                .AddQueryParameter("max_length", maxLength);
+            return await _client.GetAsync<RandomFactResponse>(request);
+        }
     }
 }
