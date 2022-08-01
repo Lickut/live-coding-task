@@ -1,14 +1,14 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Playwright;
 
 namespace LiveCodingUi.Pages
 {
     public class InventoryPage
     {
-        private IWebDriver _driver;
+        private IPage _page;
 
-        public InventoryPage(IWebDriver driver)
+        public InventoryPage(IPage page)
         {
-            _driver = driver;
+            _page = page;
         }
     }
 }

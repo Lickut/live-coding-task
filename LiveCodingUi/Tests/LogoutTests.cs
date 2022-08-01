@@ -1,20 +1,22 @@
 ﻿global using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
+using Microsoft.Playwright;
 
 namespace LiveCodingUi.Tests
 {
     public class LogoutTests
     {
-        private ChromeDriver _driver;
+        protected IBrowser Browser { get; private set; }
+        protected IBrowserContext Context { get; private set; }
+        protected IPlaywright PlaywrightInstance { get; private set; }
+        protected IPage Page { get; private set; }
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("start-maximized");
-            options.AddArgument("disable-extensions");
-            options.AddArguments("--incognito");
-            _driver = new ChromeDriver(options);
+            PlaywrightInstance = await Playwright.CreateAsync();
+            Browser = await PlaywrightInstance.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false, Channel = "chrome" });
+            Context = await Browser.NewContextAsync();
+            Page = await Context.NewPageAsync();
         }
 
         [Test]
@@ -32,9 +34,11 @@ namespace LiveCodingUi.Tests
         }
 
         [TearDown]
-        public void TearDown()
+        public async Task TearDown()
         {
-            _driver.Quit();
+            await Context.CloseAsync();
+            await Browser.CloseAsync();
+            PlaywrightInstance.Dispose();
         }
     }
 }

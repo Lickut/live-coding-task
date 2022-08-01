@@ -23,6 +23,8 @@
 ##### How to run tests
 Clone repository and run next commands:
 ```
+dotnet build .\LiveCodingUi\LiveCodingUi.csproj
+pwsh .\LiveCodingUi\bin\Debug\net6.0\playwright.ps1 install chrome
 dotnet test .\LiveCodingApi\LiveCodingApi.csproj
 dotnet test .\LiveCodingUi\LiveCodingUi.csproj
 ```

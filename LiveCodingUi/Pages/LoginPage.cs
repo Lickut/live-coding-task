@@ -1,33 +1,18 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Playwright;
 
 namespace LiveCodingUi.Pages
 {
     public class LoginPage
     {
-        private IWebDriver _driver;
+        private IPage _page;
 
-        public LoginPage(IWebDriver driver)
+        public LoginPage(IPage page)
         {
-            _driver = driver;
+            _page = page;
         }
 
-        private IWebElement UsernameInput => _driver.FindElement(By.Id("user-name"));
-        private IWebElement PasswordInput => _driver.FindElement(By.Id("password"));
-        private IWebElement LoginButton => _driver.FindElement(By.Id("login-button"));
-
-        public void SetUsername(string userName)
-        {
-            UsernameInput.SendKeys(userName);
-        }
-
-        public void SetPassword(string password)
-        {
-            PasswordInput.SendKeys(password);
-        }
-
-        public void ClickLoginButton()
-        {
-            LoginButton.Click();
-        }
+        public ILocator UsernameInput => _page.Locator("#user-name");
+        public ILocator PasswordInput => _page.Locator("#password");
+        public ILocator LoginButton => _page.Locator("#login-button");
     }
 }

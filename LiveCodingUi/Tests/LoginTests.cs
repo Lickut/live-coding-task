@@ -1,43 +1,46 @@
-﻿using NUnit.Framework;
-using LiveCodingUi.Pages;
-using OpenQA.Selenium.Chrome;
+﻿using LiveCodingUi.Pages;
+using Microsoft.Playwright;
 
 namespace LiveCodingUi.Tests
 {
     public class LoginTests
     {
-        private ChromeDriver _driver;
+        protected IBrowser Browser { get; private set; }
+        protected IBrowserContext Context { get; private set; }
+        protected IPlaywright PlaywrightInstance { get; private set; }
+        protected IPage Page { get; private set; }
 
         [SetUp]
-        public void Setup()
+        public async Task Setup()
         {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("start-maximized");
-            options.AddArgument("disable-extensions");
-            options.AddArguments("--incognito");
-            _driver = new ChromeDriver(options);
+            PlaywrightInstance = await Playwright.CreateAsync();
+            Browser = await PlaywrightInstance.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = false, Channel = "chrome" });
+            Context = await Browser.NewContextAsync();
+            Page = await Context.NewPageAsync();
         }
 
         [Test]
-        public void LoginAsStandardUserWithValidCredentials()
+        public async Task LoginAsStandardUserWithValidCredentials()
         {
             //arrange
-            _driver.Navigate().GoToUrl("https://www.saucedemo.com/");
+            await Page.GotoAsync("https://www.saucedemo.com/");
 
             //act
-            var loginPage = new LoginPage(_driver);
-            loginPage.SetUsername("standard_user");
-            loginPage.SetPassword("secret_sauce");
-            loginPage.ClickLoginButton();
+            var loginPage = new LoginPage(Page);
+            await loginPage.UsernameInput.FillAsync("standard_user");
+            await loginPage.PasswordInput.FillAsync("secret_sauce");
+            await loginPage.LoginButton.ClickAsync();
 
             //assert
             //add verification steps that inventory page is displayed
         }
 
         [TearDown]
-        public void TearDown()
+        public async Task TearDown()
         {
-            _driver.Quit();
+            await Context.CloseAsync();
+            await Browser.CloseAsync();
+            PlaywrightInstance.Dispose();
         }
     }
 }
