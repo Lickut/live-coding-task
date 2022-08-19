@@ -26,3 +26,9 @@ Clone repository and run next commands:
 dotnet test .\LiveCodingApi\LiveCodingApi.csproj
 dotnet test .\LiveCodingUi\LiveCodingUi.csproj
 ```
+
+##### Tasks
+1. Implement API test *CatRandomFactTests.GetRandomFactWithPositiveLength()*
+2. Implement API test *CatBreedsTests.GetCatBreedsWithPositiveLimit()* (advanced)
+3. Update UI test *LoginTests.LoginAsStandardUserWithValidCredentials()*
+4. Implement UI test *LogoutTest* (advanced)
