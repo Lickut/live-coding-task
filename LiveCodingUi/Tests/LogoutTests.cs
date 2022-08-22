@@ -1,4 +1,4 @@
-﻿global using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
 
 namespace LiveCodingUi.Tests
