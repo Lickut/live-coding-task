@@ -4,7 +4,7 @@
 1. [git](https://git-scm.com/)
 2. [dotnet SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) (v.6.0.400)
 3. [Chrome](https://www.google.com/chrome/) (v.103.0)
-4. IDE (Visual Studio or any of your choice)
+4. IDE (Visual Studio 2022 is recommended)
 
 ### Description
 
