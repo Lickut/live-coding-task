@@ -32,7 +32,7 @@ namespace LiveCodingUi.Tests
             //assert
             var inventoryPage = new InventoryPage(Page);
             bool isDisplyed = await inventoryPage.IsInventoryPageDisplayed();
-            Assert.That(isDisplyed);
+            Assert.That(isDisplyed, Is.True);
         }
 
         [TearDown]

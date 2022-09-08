@@ -35,7 +35,7 @@ namespace LiveCodingUi.Tests
 
             //assert
             bool isDisplayed = await loginPage.IsLoginPageDisplayed();
-            Assert.That(isDisplayed);
+            Assert.That(isDisplayed, Is.True);
         }
 
         [TearDown]

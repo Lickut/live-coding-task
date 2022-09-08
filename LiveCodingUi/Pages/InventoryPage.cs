@@ -30,7 +30,7 @@ namespace LiveCodingUi.Pages
         public async Task OpenCart() => await CartButton.ClickAsync();
         public async Task SortNameAZ() => await SortingDropdown.SelectOptionAsync("az");
         public async Task SortNameZA() => await SortingDropdown.SelectOptionAsync("za");
-        public async Task SortPriceLowHiigh() => await SortingDropdown.SelectOptionAsync("lohi");
-        public async Task SortPriceHiLo() => await SortingDropdown.SelectOptionAsync("hilo");
+        public async Task SortPriceLowHigh() => await SortingDropdown.SelectOptionAsync("lohi");
+        public async Task SortPriceHighLow() => await SortingDropdown.SelectOptionAsync("hilo");
     }
 }
