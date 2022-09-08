@@ -14,5 +14,13 @@ namespace LiveCodingUi.Pages
         public ILocator UsernameInput => _page.Locator("#user-name");
         public ILocator PasswordInput => _page.Locator("#password");
         public ILocator LoginButton => _page.Locator("#login-button");
+
+        public async Task<bool> IsLoginPageDisplayed() => await LoginButton.IsVisibleAsync();
+        public async Task Login(string username, string password)
+        {
+            await UsernameInput.FillAsync(username);
+            await PasswordInput.FillAsync(password);
+            await LoginButton.ClickAsync();
+        }
     }
 }

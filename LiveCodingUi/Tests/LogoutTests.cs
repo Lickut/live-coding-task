@@ -1,4 +1,5 @@
 ﻿global using NUnit.Framework;
+using LiveCodingUi.Pages;
 using Microsoft.Playwright;
 
 namespace LiveCodingUi.Tests
@@ -20,17 +21,21 @@ namespace LiveCodingUi.Tests
         }
 
         [Test]
-        public void Test1()
+        public async Task LogoutAsStandardUser()
         {
             //arrange
-            //add steps to login to application
+            await Page.GotoAsync("https://www.saucedemo.com/");
+            var loginPage = new LoginPage(Page);
+            await loginPage.Login("standard_user", "secret_sauce");
 
             //act
-            //add logout steps by opening side panel and clicking Logout
+            var inventoryPage = new InventoryPage(Page);
+            await inventoryPage.OpenSideMenu();
+            await inventoryPage.ClickLogout();
 
             //assert
-            //add verification steps that loging page is displayed
-            throw new NotImplementedException();
+            bool isDisplayed = await loginPage.IsLoginPageDisplayed();
+            Assert.That(isDisplayed);
         }
 
         [TearDown]

@@ -5,9 +5,9 @@ namespace LiveCodingUi.Tests
 {
     public class LoginTests
     {
+        protected IPlaywright PlaywrightInstance { get; private set; }
         protected IBrowser Browser { get; private set; }
         protected IBrowserContext Context { get; private set; }
-        protected IPlaywright PlaywrightInstance { get; private set; }
         protected IPage Page { get; private set; }
 
         [SetUp]
@@ -27,12 +27,12 @@ namespace LiveCodingUi.Tests
 
             //act
             var loginPage = new LoginPage(Page);
-            await loginPage.UsernameInput.FillAsync("standard_user");
-            await loginPage.PasswordInput.FillAsync("secret_sauce");
-            await loginPage.LoginButton.ClickAsync();
+            await loginPage.Login("standard_user", "secret_sauce");
 
             //assert
-            //add verification steps that inventory page is displayed
+            var inventoryPage = new InventoryPage(Page);
+            bool isDisplyed = await inventoryPage.IsInventoryPageDisplayed();
+            Assert.That(isDisplyed);
         }
 
         [TearDown]
