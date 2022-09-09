@@ -1,6 +1,6 @@
 ﻿using LiveCodingUi.Pages;
 using Microsoft.Playwright;
-
+using static Microsoft.Playwright.Assertions;
 namespace LiveCodingUi.Tests
 {
     public class LoginTests
@@ -31,8 +31,13 @@ namespace LiveCodingUi.Tests
             await loginPage.PasswordInput.FillAsync("secret_sauce");
             await loginPage.LoginButton.ClickAsync();
 
-            //assert
-            //add verification steps that inventory page is displayed
+            //assert           
+            var inventoryPage = new InventoryPage(Page);
+            await Expect(inventoryPage.TitlePage).ToBeVisibleAsync();
+            await Expect(inventoryPage.Filter).ToBeVisibleAsync();
+            await Expect(inventoryPage.BurgerMenu).ToBeVisibleAsync();
+            await Expect(inventoryPage.ShopingCard).ToBeVisibleAsync();
+
         }
 
         [TearDown]
