@@ -26,14 +26,20 @@ namespace LiveCodingApi.Tests
         }
 
         [Test]
-        public void GetRandomFactWithPositiveLength()
+        public async Task GetRandomFactWithPositiveLength()
         {
+            //arrange
+            int maxLength = 100;
+
             //act
-            //call Get Random Fact endpoint with maximum length = 100
+            var response = await _client.GetRandomFact(maxLength);
 
             //assert
             //verify that fact field is not empty and length field is less than maximum length
-            throw new NotImplementedException();
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Fact, Is.Not.Null.Or.Empty);
+            Assert.That(response.Length, Is.LessThanOrEqualTo(maxLength));
+            Assert.That(response.Fact.Length, Is.EqualTo(response.Length));
         }
     }
 }
