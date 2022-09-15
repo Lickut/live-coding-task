@@ -14,18 +14,21 @@ namespace LiveCodingApi.Tests
         }
 
         [Test]
-        public void GetCatBreedsWithPositiveLimit()
+        public async Task GetCatBreedsWithPositiveLimit()
         {
+            //arrange
+            int limit = 2;
+            int totalBreeds = 98;            
+            
             //act
-            //get cat breeds with limits = 2
+            var response = await _client.GetBreeds(limit);
 
             //assert
-            /* add next verifications:
-                - verify total field in response
-                - verify per_page field in response
-                - verify that data collection in response contains next breeds: "Abyssinian" and "Aegean"
-             */
-            throw new NotImplementedException();
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Data[0].Breed, Is.EqualTo("Abyssinian"));
+            Assert.That(response.Data[1].Breed, Is.EqualTo("Aegean"));
+            Assert.That(response.Total, Is.EqualTo(totalBreeds));
+            Assert.That(response.Per_Page, Is.EqualTo("2"));
         }
     }
 }

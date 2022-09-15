@@ -10,6 +10,8 @@
         public int LastPage{ get; set; }
 
         public string LastPageUrl { get; set; }
+        public string? Per_Page { get; set; }
         public int Total { get; set; }
+       
     }
 }
