@@ -11,5 +11,7 @@
 
         public string LastPageUrl { get; set; }
         public int Total { get; set; }
+
+        public string Per_Page { get; set; }
     }
 }
